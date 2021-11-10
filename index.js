@@ -15,31 +15,31 @@ app.listen(3000, function () {
     console.log("Server started. Listening on port 3000.");
 });
 
-app.get('/api/products', (req, res) => {
-    const songs = repoContext.products.findAllProducts();
+app.get('/api/songs', (req, res) => {
+    const songs = repoContext.songs.findAllSongs();
     return res.send(songs);
 });
-app.get('/api/products/:id', (req, res) => {
+app.get('/api/songs/:id', (req, res) => {
     const id = req.params.id;
-    const song = repoContext.products.findAllProducts(id);
+    const song = repoContext.songs.findAllSongs(id);
     return res.send(song);
 });
 
-app.post('/api/products', [validateProduct], (req, res) => {
-    const newProduct = req.body;
-    const addedProduct = repoContext.products.createProduct(newProduct);
-    return res.send(addedProduct);
+app.post('/api/songs', [validateProduct], (req, res) => {
+    const newSong = req.body;
+    const addedSong = repoContext.products.createSong(newSong);
+    return res.send(addedSong);
 });
 
-app.put('/api/products/:id', [validateProduct], (req, res) => {
+app.put('/api/songs/:id', [validateProduct], (req, res) => {
     const id = req.params.id;
-    const productPropertiesToUpdate = req.body;
-    const updatedProduct = repoContext.products.updateProduct(id, productPropertiesToUpdate);
-    return res.send(updatedProduct)
+    const songPropertiesToUpdate = req.body;
+    const updatedSong = repoContext.songs.updateSong(id, songPropertiesToUpdate);
+    return res.send(updatedSong)
 });
 
-   app.delete('/api/products/:id', (req, res) => {
+   app.delete('/api/songs/:id', (req, res) => {
     const id = req.params.id;
-    const updatedDataSet = repoContext.products.deleteProduct(id);
+    const updatedDataSet = repoContext.songs.deleteSong(id);
     return res.send(updatedDataSet);
 });
