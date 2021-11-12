@@ -7,14 +7,14 @@ const { validateSong } = require('./middleware/songs-validation');
 
 const app = express();
 
-app.use(express.static('/api/songs'))
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
-app.listen(3000, function () {
-    console.log("Server started. Listening on port 3000.");
-});
+const PORT = process.env.PORT || 3030;
+
+app.listen(PORT, console.log(`Server up and running on port ${PORT}`));
 
 app.get('/api/songs', (req, res) => {
     const songs = repoContext.songs.findAllSongs();
