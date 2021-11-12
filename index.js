@@ -7,6 +7,7 @@ const { validateSong } = require('./middleware/songs-validation');
 
 const app = express();
 
+app.use(express.static('/api/songs'))
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -38,7 +39,7 @@ app.put('/api/songs/:id', [validateSong], (req, res) => {
     return res.send(updatedSong)
 });
 
-   app.delete('/api/songs/:id', (req, res) => {
+app.delete('/api/songs/:id', (req, res) => {
     const id = req.params.id;
     const updatedDataSet = repoContext.songs.deleteSong(id);
     return res.send(updatedDataSet);
